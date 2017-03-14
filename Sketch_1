@@ -1,0 +1,56 @@
+/*
+ Controlling a servo position using a potentiometer (variable resistor)
+ by Michal Rinott <http://people.interaction-ivrea.it/m.rinott>
+
+ modified on 8 Nov 2013
+ by Scott Fitzgerald
+ http://www.arduino.cc/en/Tutorial/Knob
+*/
+
+#include <Servo.h>
+
+Servo myservo;  // create servo object to control a servo
+
+int potpin = 0;  // analog pin used to connect the potentiometer
+int val;    // variable to read the value from the analog pin
+int ledPin = 13;      // select the pin for the LED
+
+
+
+void setup() {
+  myservo.attach(9);  // attaches the servo on pin 9 to the servo object
+    pinMode(4, OUTPUT);
+    pinMode(3, OUTPUT);
+  Serial.begin(9600);
+  
+}
+
+void loop() {
+  val = analogRead(potpin);            // reads the value of the potentiometer (value between 0 and 1023)
+  val = map(val, 0, 1023, 0, 180);     // scale it to use it with the servo (value between 0 and 180)
+  myservo.write(val);                  // sets the servo position according to the scaled value
+ // delay(15);       // waits for the servo to get there
+
+  digitalWrite(ledPin, HIGH);
+  // stop the program for <sensorValue> milliseconds:
+delay(val);
+  // turn the ledPin off:
+  digitalWrite(ledPin, LOW);
+  // stop the program for for <sensorValue> milliseconds:
+  delay(val);
+
+  if(val<= 20) {
+  digitalWrite(3, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(100);                       // wait for a second
+  digitalWrite(3, LOW);    // turn the LED off by making the voltage LOW
+  delay(100);  
+    
+  }
+   if(val >= 160) {
+  digitalWrite(4, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(100);                       // wait for a second
+  digitalWrite(4, LOW);    // turn the LED off by making the voltage LOW
+  delay(100);  
+    
+   }
+}   
