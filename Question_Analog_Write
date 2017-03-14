@@ -1,0 +1,7 @@
+Why can you only use certain pins for analogWrite()?
+  
+ Becuse only certain pinps support PWM, Hence whith out PWM, PWM is analog Signal 
+
+What is the range the map() function maps the value to? Why this range?
+
+    The range Maps from 0 to 255, becuse thats Ardunio's range 
